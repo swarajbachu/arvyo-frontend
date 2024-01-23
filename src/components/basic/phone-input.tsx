@@ -6,13 +6,17 @@ import {
   MenuList,
   MenuItem,
   Button,
+  type InputProps,
   ThemeProvider,
 } from "@material-tailwind/react";
 import Image from "next/image";
 
 import { useCountries } from "@whizzy/react-country-code";
 
-export function PhoneInput() {
+// Omit the ref prop from the InputProps, its causing some stupid error
+type PhoneProps = Omit<InputProps, "ref">;
+
+export function PhoneInput({ ...props }: PhoneProps) {
   const { countries } = useCountries();
   const [country, setCountry] = React.useState(0);
 
@@ -87,6 +91,7 @@ export function PhoneInput() {
             containerProps={{
               className: "min-w-0",
             }}
+            {...props}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import TextInput from "./basic/text-input";
@@ -15,12 +15,12 @@ export default function SignUp() {
             id="fullName"
             placeholder="Jonny Ive"
           />
+          <PhoneInput />
           <TextInput
             label="Enter Email"
             id="email"
             placeholder="John@gmail.com"
           />
-          <PhoneInput />
         </div>
       </div>
     </section>
