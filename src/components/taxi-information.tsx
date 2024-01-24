@@ -26,6 +26,17 @@ export default function TaxiInformation() {
           className="remove-arrow"
         />
       </div>
+      <div className="flex my-2">
+        <button className="px-4 py-2 shadow-md border border-gray-300 rounded-md">
+          Safeguarding Certificate
+        </button>
+        <button className="px-4 py-2 shadow-md border border-gray-300 rounded-md ml-4">
+          B-Tech
+        </button>
+        <button className="px-4 py-2 shadow-md border border-gray-300 rounded-md ml-4">
+            Wheelchair Certificate
+        </button>
+      </div>
     </section>
   );
 }

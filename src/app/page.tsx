@@ -5,6 +5,7 @@ import DriverBasicDetails from "@/components/driver-basic-details";
 import LicenseInformation from "@/components/license-information";
 import SignUp from "@/components/sign-up";
 import TaxiInformation from "@/components/taxi-information";
+import VechileInformation from "@/components/vechile-information";
 
 export default function Home() {
   return (
@@ -19,6 +20,8 @@ export default function Home() {
         <LicenseInformation />
         <Divider />
         <TaxiInformation />
+        <Divider />
+        <VechileInformation />
       </div>
     </div>
   );
