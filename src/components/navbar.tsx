@@ -79,7 +79,7 @@ const NavLinks = ({isMobile}:{isMobile:boolean}) => {
         alt="aryvo logo"
         className="mx-6 md:block hidden"
       />
-      <Link href="#">Home</Link>
+      <Link href="/">Home</Link>
       <Link href="#">Trips</Link>
       <Link href="#">Drivers</Link>
       <Link href="#">Customers</Link>
