@@ -13,15 +13,17 @@ export default function DocumentComponent({
   days,
 }: DocumentComponentProps) {
   return (
-    <div className="flex gap-5 items-center">
-      <div className="flex justify-between cursor-pointer items-center border shadow-sm rounded-md gap-4 w-56 p-4">
+    <div className="flex lg:flex-row flex-col gap-3 items-start lg:gap-5  lg:items-center">
+      <div className="flex justify-between cursor-pointer items-center border shadow-sm rounded-md gap-4 w-full md:w-56 p-4">
         <span className="text-sm">{label}</span>
         <IoIosDocument />
       </div>
-      <p className="text-sm">{date}</p>
-      <p className="text-sm">{days}</p>
-      <p className="text-sm cursor-pointer text-blue-500">View</p>
-      <p className="text-sm cursor-pointer text-red-500">Required</p>
+      <div className="flex gap-5 items-center ml-2 lg:ml-0">
+        <p className="text-sm">{date}</p>
+        <p className="text-sm">{days}</p>
+        <p className="text-sm cursor-pointer text-blue-500">View</p>
+        <p className="text-sm cursor-pointer text-red-500">Required</p>
+      </div>
     </div>
   );
 }

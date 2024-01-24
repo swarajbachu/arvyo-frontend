@@ -3,7 +3,7 @@ import { TextInput } from "./basic";
 
 export default function DriverBasicDetails() {
   return (
-    <section className="flex gap-3 items-end">
+    <section className="flex flex-wrap gap-3 items-end">
       <TextInput label="Accounting-Ref" id="accountingRef" />
       <TextInput label="Nominal-Code" id="nominalCode" />
       <TextInput label="Call-Sign" id="callsign" placeholder="Johnny Ive" />

@@ -66,9 +66,9 @@ const documentComponent = [
 
 export default function Documents() {
   return (
-    <section className="max-lg:mt-6">
+    <section className="lg:mt-2 mt-10">
       <h2 className="text-xl font-semibold mb-6">Documents and Expiry Dates</h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-5 lg:gap-2">
         {documentComponent.map((item) => (
           <DocumentComponent
             key={item.label}
