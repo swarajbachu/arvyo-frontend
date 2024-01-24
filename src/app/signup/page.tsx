@@ -4,6 +4,7 @@ import { Divider, TextInput } from "@/components/basic";
 import Documents from "@/components/documents";
 import DriverBasicDetails from "@/components/driver-basic-details";
 import LicenseInformation from "@/components/license-information";
+import NavBar from "@/components/navbar";
 import SignUp from "@/components/sign-up";
 import TaxiInformation from "@/components/taxi-information";
 import VechileInformation from "@/components/vechile-information";
