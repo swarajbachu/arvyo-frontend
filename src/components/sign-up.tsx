@@ -8,7 +8,7 @@ export default function SignUp() {
   return (
     <section className="">
         <h2 className="text-xl font-semibold mb-6">Signup a driver</h2>
-        <div className="grid gap-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+        <div className="grid gap-3 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1">
           <TextInput
             label="Enter Full Name"
             id="fullName"
