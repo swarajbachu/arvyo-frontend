@@ -22,6 +22,8 @@ export default function TaxiInformation() {
           label="Badge Number"
           id="badgeNumber"
           placeholder="Enter Badge Number"
+          type="number"
+          className="remove-arrow"
         />
       </div>
     </section>
