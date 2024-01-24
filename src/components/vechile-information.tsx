@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput } from "./basic";
+import ToggleSwitch from "./basic/toggle";
 
 export default function VechileInformation() {
   return (
@@ -49,9 +50,20 @@ export default function VechileInformation() {
           placeholder="Enter Issued By"
         />
       </div>
-      <div className="flex gap-2 items-center">
-        
+      <div className="flex flex-col my-4 gap-3 justify-start items-start">
+        <ToggleSwitch label="PPE Barrier" id="toogle" />
+        <ToggleSwitch label="Disable Access" id="toogle" />
+        <p className="text-sm font-medium">Premium Vechile </p>
+        <p className="text-sm font-medium ">Hackney Carriage </p>
+        <p className="text-sm font-medium">Pets </p>
+        <p className="text-sm  ">Wide Car </p>
       </div>
+      <TextInput
+        label="Insurance Certificate Number" 
+        id="vechileInsuranceCertificateNumber"
+        placeholder="Enter Insurance Certificate Number"
+        className="w-56"
+      />
     </section>
   );
 }
