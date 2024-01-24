@@ -11,6 +11,7 @@ import {
 } from "@material-tailwind/react";
 import Image from "next/image";
 
+// just built my own library so kinda is a little heavy 
 import { useCountries } from "@whizzy/react-country-code";
 
 // Omit the ref prop from the InputProps, its causing some stupid error
@@ -22,12 +23,14 @@ export function PhoneInput({ ...props }: PhoneProps) {
 
   let currentCountry: any = {};
   if (countries) {
+    // Sort the countries by name
+    countries.sort((a, b) => a.name.localeCompare(b.name));
     currentCountry = countries[country];
   }
 
-  // You can further destructure the properties if needed
-  const { name, flags, countryCallingCode } = currentCountry;
+  const { name, flags, countryCallingCode, postalCode } = currentCountry;
 
+  console.log(postalCode,'postalCode')
   return (
     <ThemeProvider>
       <div className="flex flex-col">
