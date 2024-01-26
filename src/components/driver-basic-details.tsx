@@ -40,37 +40,41 @@ export default function DriverBasicDetails({ control }: FormControl) {
       <Controller
         control={control}
         name="commission"
-        render={({ field }) => (
+        render={({ field, formState }) => (
           <TextInput
             label="Commission"
             id="commission"
             placeholder="20%"
             type="number"
             {...field}
+            error={formState.errors.commission?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="weeklyCharge"
-        render={({ field }) => (
+        render={({ field,formState }) => (
           <TextInput
             label="Weekly-Charge"
             id="weeklyCharge"
             placeholder="£100"
+            type="number"
             {...field}
+            error={formState.errors.weeklyCharge?.message}
           />
         )}
       />
       <Controller
         control={control}
         name="driverGroup"
-        render={({ field }) => (
+        render={({ field,formState }) => (
           <TextInput
             label="Driver-Group"
             id="driverGroup"
             placeholder="Group A"
             {...field}
+            error={formState.errors.driverGroup?.message}
           />
         )}
       />

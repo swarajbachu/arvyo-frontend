@@ -1,7 +1,7 @@
 "use client";
 
 import { auth } from "@/utils/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useEffect, useState } from "react";
@@ -33,6 +33,7 @@ const Signup = () => {
           const user = userCredential.user;
           updateProfile(user, { displayName: name });
           toast.success("Hurray!! You're Account is Created");
+          signOut(auth);
           router.push("/login");
         })
         .catch((error) => {

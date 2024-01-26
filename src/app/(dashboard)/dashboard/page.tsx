@@ -10,11 +10,10 @@ import VechileInformation from "@/components/vechile-information";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { driverFormType, schema } from "@/utils/form";
-import { toast } from "sonner";
-import { error } from "console";
+
 
 export default function Dashboard() {
-  const { control, watch,formState  } = useForm<driverFormType>({
+  const { control, watch ,formState } = useForm<driverFormType>({
     resolver: zodResolver(schema),
     defaultValues: {
       fullName: "",
@@ -51,7 +50,8 @@ export default function Dashboard() {
   const formValues = watch();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(formValues);
+    e.preventDefault();
+    console.log(formState.errors);
     console.log(e.target);
   };
 

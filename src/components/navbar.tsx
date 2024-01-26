@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -11,6 +11,16 @@ import { MdClose } from "react-icons/md";
 
 export default function NavBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const [time, setTime] = useState(new Date().toString().split(" GMT")[0]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date().toString().split(" GMT")[0]);
+    }, 1000);
+    return () => clearInterval(interval);
+  } 
+  , []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -56,7 +66,7 @@ export default function NavBar() {
 
       <div className="xl:flex lg:gap-2 xl:gap-4 items-center hidden">
         <p className="text-sm text-gray-900 max-w-fit">
-          {new Date().toString().split(" GMT")[0]}
+          {time}
         </p>
         <button className="bg-transparent border-blue-500 border px-3 rounded-full text-blue-500 text-sm py-1">
           create

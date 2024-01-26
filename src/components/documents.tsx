@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, { useRef, useState } from "react";
 import DocumentComponent from "./basic/documentComponent";
 
 const documentComponent = [
@@ -65,6 +66,9 @@ const documentComponent = [
 ];
 
 export default function Documents() {
+  const [file, setFile] = useState<File | null>(null);
+  const fileRef = useRef<HTMLInputElement | null>(null);
+
   return (
     <section className="lg:mt-2 mt-10">
       <h2 className="text-xl font-semibold mb-6">Documents and Expiry Dates</h2>
@@ -75,6 +79,14 @@ export default function Documents() {
             label={item.label}
             date={item.date} 
             days={item.days}
+            onChange={() => {
+              
+              if (fileRef.current?.files) {
+                setFile(fileRef.current.files[0]);
+              }
+            }}
+            ref={fileRef}
+            // ref={fileRef}
           />
         ))}
       </div>

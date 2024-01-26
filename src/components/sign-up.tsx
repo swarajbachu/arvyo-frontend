@@ -33,12 +33,14 @@ export default function SignUp({ control }: FormControl) {
         <Controller
           control={control}
           name="emailAddress"
-          render={({ field }) => (
+          render={({ field,formState }) => (
             <TextInput
               label="Enter Email"
               id="email"
+              type="email"
               placeholder="John@gmail.com"
               {...field}
+              // error={formState.errors.emailAddress?.message}
             />
           )}
         />

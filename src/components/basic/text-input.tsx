@@ -5,12 +5,14 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   id: string;
   className?: string;
+  error?: string;
 }
 
 export default function TextInput({
   label,
   id,
   className,
+  error,
   ...props
 }: TextInputProps) {
   return (
@@ -31,6 +33,7 @@ export default function TextInput({
         required
         {...props}
       />
+      <span className="text-xs text-red-500 font-semibold mt-1">{error}</span>
     </div>
   );
 }
