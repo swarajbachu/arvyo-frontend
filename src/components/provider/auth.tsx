@@ -70,35 +70,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     toast.dismiss();
   };
 
-  useEffect(() => {
-    console.log(currentUser);
+  // useEffect(() => {
+  //   console.log(currentUser);
 
-    const user = localStorage.getItem("user") === "true";
+  //   const user = localStorage.getItem("user") === "true";
 
-    console.log(
-      user,
-      publicPages.includes(pathName),
-      pathName,
-      localStorage.getItem("user")
-    );
+  //   console.log(
+  //     user,
+  //     publicPages.includes(pathName),
+  //     pathName,
+  //     localStorage.getItem("user")
+  //   );
 
-    if (user && publicPages.includes(pathName) && !redirect) {
-      toast("You're already logged in", { duration: 2000 });
-      router.push("/");
-      setRedirect(true);
-      return;
-    }
-    if (!user && !publicPages.includes(pathName) && !redirect) {
-      setRedirect(true);
+  //   if (user && publicPages.includes(pathName) && !redirect) {
+  //     toast("You're already logged in", { duration: 2000 });
+  //     router.push("/");
+  //     setRedirect(true);
+  //     return;
+  //   }
+  //   if (!user && !publicPages.includes(pathName) && !redirect) {
+  //     setRedirect(true);
 
-      toast("You're not logged in", { duration: 2000 });
-      router.push("/login");
-      return;
-    }
-    return () => {
-      setRedirect(false);
-    };
-  }, [pathName]);
+  //     toast("You're not logged in", { duration: 2000 });
+  //     router.push("/login");
+  //     return;
+  //   }
+  //   return () => {
+  //     setRedirect(false);
+  //   };
+  // }, [pathName]);
+  
 
   const authValue: AuthContext = {
     currentUser,
