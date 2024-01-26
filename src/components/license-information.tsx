@@ -1,7 +1,8 @@
 import React from "react";
 import { TextInput } from "./basic";
+import { FormControl } from "@/utils/form";
 
-export default function LicenseInformation() {
+export default function LicenseInformation({control}:FormControl) {
   return (
     <section>
       <div className="flex gap-5 items-center mb-6">

@@ -1,7 +1,8 @@
 import React from "react";
 import { TextInput } from "./basic";
+import { FormControl } from "@/utils/form";
 
-export default function TaxiInformation() {
+export default function TaxiInformation({control}:FormControl) {
   return (
     <section>
       <h3 className="text-xl font-semibold mb-6 w-full">

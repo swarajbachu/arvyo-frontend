@@ -1,7 +1,8 @@
 import React from "react";
 import { TextInput } from "./basic";
+import { FormControl } from "@/utils/form";
 
-export default function DriverBasicDetails() {
+export default function DriverBasicDetails({control}:FormControl) {
   return (
     <section className="flex flex-wrap gap-3 items-end">
       <TextInput label="Accounting-Ref" id="accountingRef" />

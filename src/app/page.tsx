@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { auth } from "@/utils/firebase";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
@@ -25,15 +25,17 @@ export default function Home() {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthUser(user);
-      }else{setAuthUser(undefined)}
+      } else {
+        setAuthUser(undefined);
+      }
     });
 
     return () => {
       listen();
-    }
+    };
   }, []);
 
-  const  userSignOut = async () => {
+  const userSignOut = async () => {
     try {
       toast.loading("Logging out...");
       await signOut(auth).catch((error) => {
@@ -41,38 +43,47 @@ export default function Home() {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         toast.error(errorMessage);
-      }
-      );
+      });
       toast.success("Logged Out");
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
     toast.dismiss();
-  }
+  };
   return (
     <div className="w-full h-screen flex flex-col gap-3 justify-center items-center">
       <h3>
-        {Greetings()} {authUser?.email}!
+        {Greetings()} {authUser?.displayName}!
       </h3>
       {authUser ? (
-        <button
-        onClick={userSignOut}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-          Logout
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={userSignOut}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Logout
+          </button>
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Dashboard
+          </button>
+        </div>
       ) : (
         <div className="flex gap-2">
-        <button
-        onClick={() => router.push("/login")}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-          Login
-        </button>
-        <button
-        onClick={() => router.push("/signup")}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-          Signup
-        </button>
+          <button
+            onClick={() => router.push("/login")}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Login
+          </button>
+          <button
+            onClick={() => router.push("/signup")}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Signup
+          </button>
         </div>
       )}
     </div>

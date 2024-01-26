@@ -4,29 +4,33 @@ import React, { useEffect, useState } from "react";
 import TextInput from "./basic/text-input";
 import { PhoneInput } from "./basic/phone-input";
 import { useRouter } from "next/navigation";
+import { FormControl } from "@/utils/form";
+import { Controller } from "react-hook-form";
 
-export default function SignUp() {
-  const [email, setEmail] = React.useState("");
-  const router = useRouter();
-
+export default function SignUp({control}: FormControl) {
 
 
   return (
-    <section className="">
+    <section>
       <h2 className="text-xl font-semibold mb-6">Signup a driver</h2>
       <div className="grid gap-3 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 items-end">
-        <TextInput
-          label="Enter Full Name"
-          id="fullName"
-          placeholder="Jonny Ive"
+        <Controller
+          control={control}
+          name="fullName"
+          render={({ field }) => (
+            <TextInput
+              label="Enter Full Name"
+              id="fullName"
+              placeholder="Jonny Ive"
+              {...field}
+            />
+          )}
         />
         <PhoneInput />
         <TextInput
           label="Enter Email"
           id="email"
           placeholder="John@gmail.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
         />
         {/* {!authUser ? (
           <>

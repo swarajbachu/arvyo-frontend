@@ -1,8 +1,9 @@
 import React from "react";
 import { TextInput } from "./basic";
 import ToggleSwitch from "./basic/toggle";
+import { FormControl } from "@/utils/form";
 
-export default function VechileInformation() {
+export default function VechileInformation({control}:FormControl) {
   return (
     <section>
       <div>
