@@ -1,11 +1,13 @@
 "use client";
 
 import { Button } from "@/components/basic";
+import { useAuth } from "@/components/provider/auth";
 import { auth } from "@/utils/firebase";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const Greetings = () => {
   if (new Date().getHours() < 12) {
@@ -18,57 +20,45 @@ const Greetings = () => {
 };
 
 export default function Home() {
-  const [authUser, setAuthUser] = useState<User>();
-
+  const { currentUser, userSignOut } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(undefined);
-      }
-    });
+  const formFilled = localStorage.getItem("status") === "applied";
+  console.log(formFilled, localStorage.getItem("status"));
 
-    return () => {
-      listen();
-    };
-  }, []);
-
-  const userSignOut = async () => {
-    try {
-      toast.loading("Logging out...");
-      await signOut(auth).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        toast.error(errorMessage);
-      });
-      toast.success("Logged Out");
-      router.push("/login");
-    } catch (err) {
-      console.log(err);
-    }
-    toast.dismiss();
-  };
-  
   return (
-    <div className="w-full h-screen flex flex-col gap-3 justify-center items-center">
-      <h3>
-        {Greetings()} {authUser?.displayName}!
-      </h3>
-      {authUser ? (
-        <div className="flex gap-2">
-          <Button onClick={userSignOut}>Logout</Button>
-          <Button onClick={() => router.push("/driver-details-form")}>Fill Driver Form</Button>
+    <div className="h-screen flex justify-center items-center">
+      <div className="shadow-md rounded-lg p-8 max-w-fit max-h-fit">
+        <div className="w-full flex flex-col gap-3 justify-center items-center">
+        <Image
+          src="/logo.png"
+          alt="Success"
+          width={70}
+          height={70}
+          className="mx-auto my-5"
+        />
+          <h3 className="text-xl">
+            {Greetings()} {currentUser?.displayName}! 
+          </h3>
+          <h4 className="text-sm mb-3 font-semibold text-gray-600">Welcome to the Driver&apos;s Portal</h4>
+
+          {currentUser ? (
+            <div className="flex gap-2">
+              <Button onClick={userSignOut} className="bg-red-600">
+                Logout
+              </Button>
+              <Button onClick={() => router.push("/driver-details-form")}>
+                {formFilled ? "Refill the form" : "Fill Driver Form"}
+              </Button>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <Button onClick={() => router.push("/login")}>Login</Button>
+              <Button onClick={() => router.push("/signup")}>Signup</Button>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="flex gap-2">
-          <Button onClick={() => router.push("/login")}>Login</Button>
-          <Button onClick={() => router.push("/signup")}>Signup</Button>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

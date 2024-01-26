@@ -8,6 +8,8 @@ import { IoMdMailOpen } from "react-icons/io";
 import { FaGear } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdClose } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
+import { useAuth } from "./provider/auth";
 
 export default function NavBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -19,16 +21,16 @@ export default function NavBar() {
       setTime(new Date().toString().split(" GMT")[0]);
     }, 1000);
     return () => clearInterval(interval);
-  } 
-  , []);
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const { userSignOut } = useAuth();
+
   return (
     <nav className="px-5 py-3 mb-5 bg-gray-300 flex justify-between items-center">
-      {/* Hamburger Icon for Mobile */}
       <Image
         src="/arvyo.png"
         width={50}
@@ -41,20 +43,11 @@ export default function NavBar() {
         onClick={toggleSidebar}
       />
 
-      {/* Sidebar for Mobile */}
       {isSidebarOpen && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-50 z-50">
-          {/* Sidebar Content */}
           <div className="fixed bg-white h-full w-64 p-4">
-            <NavLinks  isMobile />
+            <NavLinks isMobile />
           </div>
-          {/* Close Button */}
-          {/* <div
-            className="absolute top-4 right-4 cursor-pointer"
-            onClick={toggleSidebar}
-          >
-            Close
-          </div> */}
           <MdClose
             className="absolute top-4 right-6 cursor-pointer text-2xl"
             onClick={toggleSidebar}
@@ -65,9 +58,7 @@ export default function NavBar() {
       <NavLinks isMobile={false} />
 
       <div className="xl:flex lg:gap-2 xl:gap-4 items-center hidden">
-        <p className="text-sm text-gray-900 max-w-fit">
-          {time}
-        </p>
+        <p className="text-sm text-gray-900 max-w-fit">{time}</p>
         <button className="bg-transparent border-blue-500 border px-3 rounded-full text-blue-500 text-sm py-1">
           create
           <MdKeyboardArrowDown className="inline-block text-lg" />
@@ -75,14 +66,24 @@ export default function NavBar() {
         <p className="text-sm">Operator Name</p>
         <IoMdMailOpen className="text-xl cursor-pointer" />
         <FaGear className="text-xl cursor-pointer" />
+        <button
+          className="bg-red-400 border px-3 rounded-md text-white text-sm py-1"
+          onClick={userSignOut}
+        >
+          <IoLogOut className="text-xl cursor-pointer" />
+        </button>
       </div>
     </nav>
   );
 }
 
-const NavLinks = ({isMobile}:{isMobile:boolean}) => {
+const NavLinks = ({ isMobile }: { isMobile: boolean }) => {
   return (
-    <div className={`${isMobile ? 'flex flex-col md:hidden' : 'md:flex-row hidden md:flex'}  gap-5 items-start md:items-center text-sm`}>
+    <div
+      className={`${
+        isMobile ? "flex flex-col md:hidden" : "md:flex-row hidden md:flex"
+      }  gap-5 items-start md:items-center text-sm`}
+    >
       <Image
         src="/arvyo.png"
         width={50}

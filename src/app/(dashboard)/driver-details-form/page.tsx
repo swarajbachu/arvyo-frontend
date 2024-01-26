@@ -10,10 +10,17 @@ import VechileInformation from "@/components/vechile-information";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { driverFormType, schema } from "@/utils/form";
-
+import { collection, doc, setDoc } from "firebase/firestore";
+import { useAuth } from "@/components/provider/auth";
+import { useState } from "react";
+import { fireCollection } from "@/utils/firebase";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
-  const { control, watch ,formState } = useForm<driverFormType>({
+  const [loading, setLoading] = useState(false);
+  const { currentUser } = useAuth();
+  const { control, watch, formState } = useForm<driverFormType>({
     resolver: zodResolver(schema),
     defaultValues: {
       fullName: "",
@@ -47,12 +54,26 @@ export default function Dashboard() {
     },
   });
 
+  const router = useRouter();
   const formValues = watch();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formState.errors);
     console.log(e.target);
+    try {
+      toast.loading("Submitting...");
+      const specificId = String(currentUser?.uid);
+      const specificDocRef = doc(fireCollection, specificId);
+      await setDoc(specificDocRef, formValues);
+      localStorage.setItem("status", "applied");
+      router.push("/success");
+      toast.success("You have done it, Submitted Successfully", { duration: 5000 });
+    } catch (error: any) {
+      toast.error(`${error}`);
+    } 
+      setLoading(false);
+    toast.dismiss();
   };
 
   return (
@@ -82,7 +103,11 @@ export default function Dashboard() {
           </div>
           <div>
             <Documents />
-            <Button type="submit" className="w-full mt-4">
+            <Button
+              type="submit"
+              className="w-full mt-4"
+              disabled={formState.isSubmitting || loading}
+            >
               Submit
             </Button>
           </div>
