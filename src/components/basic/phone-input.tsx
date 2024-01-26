@@ -30,7 +30,6 @@ export function PhoneInput({ ...props }: PhoneProps) {
 
   const { name, flags, countryCallingCode, postalCode } = currentCountry;
 
-  console.log(postalCode,'postalCode')
   return (
     <ThemeProvider>
       <div className="flex flex-col">

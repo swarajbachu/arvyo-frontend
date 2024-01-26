@@ -1,15 +1,9 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import TextInput from "./basic/text-input";
-import { PhoneInput } from "./basic/phone-input";
-import { useRouter } from "next/navigation";
-import { FormControl } from "@/utils/form";
+import React from "react";
 import { Controller } from "react-hook-form";
+import { PhoneInput, TextInput } from "./basic";
+import { FormControl, schema } from "@/utils/form";
 
-export default function SignUp({control}: FormControl) {
-
-
+export default function SignUp({ control }: FormControl) {
   return (
     <section>
       <h2 className="text-xl font-semibold mb-6">Signup a driver</h2>
@@ -26,46 +20,28 @@ export default function SignUp({control}: FormControl) {
             />
           )}
         />
-        <PhoneInput />
-        <TextInput
-          label="Enter Email"
-          id="email"
-          placeholder="John@gmail.com"
-        />
-        {/* {!authUser ? (
-          <>
-            <TextInput
-              label="Enter Password"
-              id="password"
-              placeholder="********"
-              type="password"
-              value={password}
-              className=""
-              onChange={(e) => setPassword(e.target.value)}
+        <Controller
+          control={control}
+          name="phoneNumber"
+          render={({ field }) => (
+            <PhoneInput
+              id="phoneNumber"
+              {...field}
             />
-            <button
-              className="px-4 text-sm h-12 shadow-md border border-gray-300 rounded-md"
-              onClick={SignUp}
-              disabled={loading}
-            >
-              Create Account
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              className="px-4 text-sm h-12 shadow-md border border-gray-300 rounded-md"
-              onClick={() => router.push("/")}
-            >
-              Go Home
-            </button>
-          </>
-        )}
-      </div>
-      {authUser && (
-        <p className="font-bold text-sm my-2 text-blue-600">
-          you are already loggin with email {authUser.email}{" "}
-        </p>)} */}
+          )}
+        />
+        <Controller
+          control={control}
+          name="emailAddress"
+          render={({ field }) => (
+            <TextInput
+              label="Enter Email"
+              id="email"
+              placeholder="John@gmail.com"
+              {...field}
+            />
+          )}
+        />
       </div>
     </section>
   );

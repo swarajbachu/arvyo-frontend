@@ -1,6 +1,7 @@
 import React from "react";
 import { TextInput } from "./basic";
 import { FormControl } from "@/utils/form";
+import { Controller } from "react-hook-form";
 
 export default function TaxiInformation({control}:FormControl) {
   return (
@@ -9,23 +10,43 @@ export default function TaxiInformation({control}:FormControl) {
         Taxi or PH Badge Information
       </h3>
       <div className="flex gap-4 flex-wrap grow">
-        <TextInput
-          label="Driver Type"
-          id="driverType"
-          placeholder="Enter Driver Type"
-        />
-        <TextInput
-          label="Issued By"
-          id="issuedBy"
-          placeholder="Enter Issued By"
-        />
-        <TextInput
-          label="Badge Number"
-          id="badgeNumber"
-          placeholder="Enter Badge Number"
-          type="number"
-          className="remove-arrow"
-        />
+        <Controller
+        control={control}
+        name="driverType"
+        render={({ field }) => (
+          <TextInput
+            label="Driver Type"
+            id="driverType"
+            placeholder="Enter Driver Type"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="issuedBy"
+        render={({ field }) => (
+          <TextInput
+            label="Issued By"
+            id="issuedBy"
+            placeholder="Enter Issued By"
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        control={control}
+        name="badgeNumber"
+        render={({ field }) => (
+          <TextInput
+            label="Badge Number"
+            id="badgeNumber"
+            placeholder="Enter Badge Number"
+            type="number"
+            {...field}
+          />
+        )}
+      />
       </div>
       <div className="flex my-2">
         <button className="px-4 py-2 shadow-md border border-gray-300 rounded-md">

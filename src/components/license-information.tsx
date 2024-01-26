@@ -1,6 +1,7 @@
 import React from "react";
 import { TextInput } from "./basic";
 import { FormControl } from "@/utils/form";
+import { Controller } from "react-hook-form";
 
 export default function LicenseInformation({control}:FormControl) {
   return (
@@ -12,10 +13,17 @@ export default function LicenseInformation({control}:FormControl) {
         </p>
       </div>
       <div className="grid gap-3 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1">
-        <TextInput
-          label="DVLA License"
-          id="license"
-          placeholder="Enter DVLA License"
+        <Controller
+          control={control}
+          name="dvaLicence"
+          render={({ field }) => (
+            <TextInput
+              label="Dva Licence"
+              id="licenseNumber"
+              placeholder="Enter License Number"
+              {...field}
+            />
+          )}
         />
         {/* <div className="flex flex-col">
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
