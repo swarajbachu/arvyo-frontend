@@ -73,7 +73,7 @@ export default function Documents() {
           <DocumentComponent
             key={item.label}
             label={item.label}
-            date={item.date}
+            date={item.date} 
             days={item.days}
           />
         ))}

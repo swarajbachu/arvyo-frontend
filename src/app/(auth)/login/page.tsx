@@ -13,6 +13,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const login = async () => {
     setLoading(true);
@@ -27,8 +28,7 @@ export default function Login() {
         // Signed in
         toast.success("Login Success");
         const user = userCredential.user;
-        router.push("/");
-
+        router.push("/dashboard");
         // ...
       }
       ).catch((error) => {
@@ -36,6 +36,7 @@ export default function Login() {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
         toast.error(errorMessage);
+        setError(errorMessage);
       }
       );
       // router.push("/");
@@ -66,8 +67,14 @@ export default function Login() {
             Hello Again!
           </h1>
           <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
+          {error && (
+            <div className="shadow-md rounded-xl p-4 my-4 text-red-500 w-80 mx-auto">
+              <p className="font-bold">Error</p>
+              <p>{error}</p>
+            </div>
+          )}
 
-          <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+          <div className="flex items-center w-80 border-2 py-2 px-3 rounded-2xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-gray-400"
