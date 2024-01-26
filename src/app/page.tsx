@@ -46,11 +46,13 @@ export default function Home() {
         toast.error(errorMessage);
       });
       toast.success("Logged Out");
+      router.push("/login");
     } catch (err) {
       console.log(err);
     }
     toast.dismiss();
   };
+  
   return (
     <div className="w-full h-screen flex flex-col gap-3 justify-center items-center">
       <h3>
@@ -59,7 +61,7 @@ export default function Home() {
       {authUser ? (
         <div className="flex gap-2">
           <Button onClick={userSignOut}>Logout</Button>
-          <Button onClick={() => router.push("/dashboard")}>Dashboard</Button>
+          <Button onClick={() => router.push("/driver-details-form")}>Fill Driver Form</Button>
         </div>
       ) : (
         <div className="flex gap-2">

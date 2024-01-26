@@ -28,7 +28,7 @@ export default function Login() {
         // Signed in
         toast.success("Login Success");
         const user = userCredential.user;
-        router.push("/dashboard");
+        router.push("/");
         // ...
       }
       ).catch((error) => {

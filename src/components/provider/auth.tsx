@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, {
   useContext,
@@ -46,20 +46,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => listen();
   }, []);
 
+
   useEffect(() => {
-    if (currentUser && (publicPages.includes(pathName))){
-      toast("You're already logged in");
-      toast('You can logout by clicking on "Logout" button');
+    let isMounted = true;
+
+    if (isMounted && currentUser && publicPages.includes(pathName)) {
+      toast("You're already logged in", { duration: 2000 });
       router.push("/");
     }
-    if (!currentUser && !publicPages.includes(pathName)) {
-      toast.error("You're not logged in");
-      toast("Please login to continue");
+
+    if (isMounted && !currentUser && !publicPages.includes(pathName)) {
+      toast("You're not logged in", { duration: 2000 });
       router.push("/login");
     }
-    toast.dismiss();
-  }, [currentUser, pathName, router]);
 
+    return () => {
+      isMounted = false; // Set isMounted to false when component is unmounted
+    };
+
+  }, [pathName]);
   const authValue: AuthContext = {
     currentUser,
     loading,

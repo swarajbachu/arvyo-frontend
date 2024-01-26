@@ -33,8 +33,7 @@ const Signup = () => {
           const user = userCredential.user;
           updateProfile(user, { displayName: name });
           toast.success("Hurray!! You're Account is Created");
-          signOut(auth);
-          router.push("/login");
+          router.push("/");
         })
         .catch((error) => {
           const errorCode = error.code;
