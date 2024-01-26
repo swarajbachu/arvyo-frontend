@@ -22,9 +22,14 @@ const Greetings = () => {
 export default function Home() {
   const { currentUser, userSignOut } = useAuth();
   const router = useRouter();
+  const [formFilled, setFormFilled] = useState(false);
 
-  const formFilled = localStorage.getItem("status") === "applied";
-  console.log(formFilled, localStorage.getItem("status"));
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    const formFilled = localStorage.getItem("status") === "applied";
+    setFormFilled(formFilled);
+  }
+
 
   return (
     <div className="h-screen flex justify-center items-center">
